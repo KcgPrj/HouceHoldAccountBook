@@ -1,0 +1,15 @@
+debug: true
+logging.level.org.springframework.security: INFO
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+      url: jdbc:h2:file:~/db/hoge.db;Mode=MySQL
+      driverClassName: org.h2.Driver
+      username: hoge
+  jpa:
+    hibernate:
+      ddl-auto: update
+security:
+  basic:
+    enabled: false
