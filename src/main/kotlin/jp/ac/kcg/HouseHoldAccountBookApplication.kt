@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-open class HouceHoldAccountBookApplication
+open class HouseHoldAccountBookApplication
 
 fun main(args: Array<String>) {
-    SpringApplication.run(HouceHoldAccountBookApplication::class.java, *args)
+    SpringApplication.run(HouseHoldAccountBookApplication::class.java, *args)
 }
