@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ログイン</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script>
+        $(function () {
+            //ajaxで送信時にXSRF-TOKENをヘッダにつける
+            $(document).ajaxSend(function (e, xhr, options) {
+                xhr.setRequestHeader('X-XSRF-TOKEN', findXsrfTokenFromCookie());
+            });
+
+            $('#logout').click(function() {
+                $.ajax({
+                    url: '/logout',
+                    method: 'post'
+                }).done(function (data) {
+                    window.location = '/';
+                }).fail(function (data) {
+                    alert("error");
+                })
+            });
+        })
+
+        //Cookieからトークンの情報を取得
+        function findXsrfTokenFromCookie() {
+            var cookie = document.cookie;
+            var tokenHeader = "XSRF-TOKEN";
+            var startPos = cookie.indexOf(tokenHeader + "=");
+            if(startPos == -1) {
+                return;
+            }
+            startPos += tokenHeader.length + 1;
+            var endPos = cookie.indexOf(";", startPos);
+            if(endPos == -1) {
+                endPos = cookie.length;
+            }
+            return unescape(cookie.substring(startPos, endPos))
+        }
+    </script>
+</head>
+<body>
+<table th:if="${principal == null}">
+    <tr>
+        <td>Login with: </td>
+        <td><a href="/login/facebook">facebook</a></td>
+    </tr>
+    <tr>
+        <td>Login with: </td>
+        <td><a href="/login/github">github</a></td>
+    </tr>
+</table>
+<div th:if="${principal != null}">
+    <p th:text="|${principal.name}でログイン済み|">xxxでログイン済み</p>
+    <button id="logout">ログアウト</button>
+</div >
+</body>
+</html>
