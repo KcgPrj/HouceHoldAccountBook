@@ -1,4 +1,4 @@
-package jp.ac.kcg.controller
+package jp.ac.kcg.controller.screen.user
 
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model

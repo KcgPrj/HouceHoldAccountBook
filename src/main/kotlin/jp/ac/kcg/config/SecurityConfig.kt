@@ -42,7 +42,7 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         //ログイン画面は常にアクセス許可 それ以外は要検証
         http.authorizeRequests()
-                .antMatchers("/", "/login**", "/ico/favicon.ico", "/webjars/**").permitAll()
+                .antMatchers("/", "/login**", "/ico/favicon.ico", "/webjars/**", "/error/**").permitAll()
                 .anyRequest().authenticated()
                 .and().logout().logoutSuccessUrl("/").permitAll()
                 .and().csrf().csrfTokenRepository(csrfTokenRepository())
