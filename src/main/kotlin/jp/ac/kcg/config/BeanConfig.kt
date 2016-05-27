@@ -1,5 +1,6 @@
 package jp.ac.kcg.config
 
+import jp.ac.kcg.service.UserServiceImpl
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer
 import org.springframework.boot.web.servlet.ErrorPage
 import org.springframework.context.annotation.Bean
@@ -17,4 +18,7 @@ open class BeanConfig {
             container.addErrorPages(ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500.html"))
         }
     }
+
+    @Bean
+    open fun userService() = UserServiceImpl()
 }
