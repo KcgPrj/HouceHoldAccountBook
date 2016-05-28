@@ -76,4 +76,43 @@ class UserServiceTests {
         user = userService.findUserOrCreate("clientId", "name")
         assertThat(userService.findUser("clientId", "name")).isEqualTo(user)
     }
+
+    //ちゃんと名前が更新できるか
+    @Test
+    fun testUpdateName() {
+        val user = userService.createUser("clientId", "name")
+        assertThat(user.screenName).isEqualTo("name")
+
+        val updatedUser = userService.updateScreenName("clientId", "name", "hoge")
+        assertThat(updatedUser.screenName).isEqualTo("hoge")
+
+        val user2 = userService.findUser("clientId", "name")
+        assertThat(user2?.screenName).isEqualTo("hoge")
+    }
+
+    @Test(expected = UserNotFoundException::class)
+    fun testUpdateNameException() {
+        userService.updateScreenName("clientId", "name", "hoge")
+    }
+
+    @Test
+    fun testSearchByScreenName() {
+        userService.createUser("clientId", "hoge")
+        userService.createUser("clientId", "fuga")
+        //一応名前を更新したケースも用意
+        userService.createUser("clientId", "hoger")
+        userService.updateScreenName("clientId", "hoger", "hogera")
+
+        val list1 = userService.searchUsersByScreenName("g")
+        assertThat(list1.size).isEqualTo(3)
+
+        val list2 = userService.searchUsersByScreenName("u")
+        assertThat(list2.size).isEqualTo(1)
+        assertThat(list2.first().screenName).isEqualTo("fuga")
+
+        val list3 = userService.searchUsersByScreenName("hoge")
+        assertThat(list3.size).isEqualTo(2)
+        assertThat(list3.map { it.screenName }).contains("hoge")
+        assertThat(list3.map { it.screenName }).contains("hogera")
+    }
 }
