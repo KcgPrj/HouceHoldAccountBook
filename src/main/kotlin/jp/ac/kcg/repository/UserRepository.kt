@@ -7,4 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository
 /**
  * Userのリポジトリ
  */
-interface UserRepository: JpaRepository<User, UserPK>
+interface UserRepository: JpaRepository<User, UserPK> {
+
+    /**
+     * screenNameでLIKE検索
+     */
+    fun findByScreenNameContaining(screenName: String): List<User>
+}

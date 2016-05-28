@@ -1,10 +1,7 @@
 package jp.ac.kcg.domain
 
 import java.io.Serializable
-import javax.persistence.Column
-import javax.persistence.Embeddable
-import javax.persistence.EmbeddedId
-import javax.persistence.Entity
+import javax.persistence.*
 
 /**
  * ユーザーの主キー
@@ -27,6 +24,7 @@ data class UserPK (
  * ユーザーのテーブル
  */
 @Entity
+@Table(indexes = arrayOf(Index(columnList = "screenName")))
 data class User(
         @EmbeddedId
         @Column(updatable = false, nullable = false)
