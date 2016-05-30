@@ -27,7 +27,7 @@ class UserRestController {
         val auth = (principal as? OAuth2Authentication) ?: throw InvalidAuthorizationInformationException()
         val user = userService.findUser(auth.oAuth2Request.clientId, auth.userAuthentication.name) ?: throw UserNotFoundException()
 
-        return UserModel(user.id.clientId, user.id.name, user.screenName)
+        return UserModel(user.id.clientId, user.id.userName, user.screenName)
     }
 
     /**
@@ -36,7 +36,7 @@ class UserRestController {
     @GetMapping("/api/user/")
     fun findUser(@RequestParam("clientId") clientId: String, @RequestParam("name") name: String): UserModel? {
         val user = userService.findUser(clientId, name) ?: return null
-        return UserModel(user.id.clientId, user.id.name, user.screenName)
+        return UserModel(user.id.clientId, user.id.userName, user.screenName)
     }
 
     /**
@@ -45,7 +45,7 @@ class UserRestController {
     @GetMapping("/api/user/search")
     fun findUserByScreenName(@RequestParam("query") query: String) =
             userService.searchUsersByScreenName(query).map {
-                UserModel(it.id.clientId, it.id.name, it.screenName)
+                UserModel(it.id.clientId, it.id.userName, it.screenName)
             }
 
     /**
