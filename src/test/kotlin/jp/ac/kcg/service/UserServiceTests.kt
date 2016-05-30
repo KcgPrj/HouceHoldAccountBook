@@ -1,6 +1,7 @@
 package jp.ac.kcg.service
 
 import jp.ac.kcg.HouseHoldAccountBookApplication
+import jp.ac.kcg.domain.UserPK
 import jp.ac.kcg.repository.UserRepository
 import org.assertj.core.api.Assertions.*
 import org.junit.After
@@ -114,5 +115,23 @@ class UserServiceTests {
         assertThat(list3.size).isEqualTo(2)
         assertThat(list3.map { it.screenName }).contains("hoge")
         assertThat(list3.map { it.screenName }).contains("hogera")
+    }
+
+    @Test
+    fun testCreateIfNotExist() {
+        val user = userService.findUser("clientId", "name")
+        assertThat(user).isNull()
+
+        userService.createIfNotExist("clientId", "name")
+        userService.updateScreenName("clientId", "name", "hoge")
+
+        val user2 = userService.findUser("clientId", "name")
+        assertThat(user2).isNotNull()
+        assertThat(user2?.id).isEqualTo(UserPK("clientId", "name"))
+        assertThat(user2?.screenName).isEqualTo("hoge")
+
+        userService.createIfNotExist("clientId", "name")
+        val user3 = userService.findUser("clientId", "name")
+        assertThat(user3?.screenName).isEqualTo("hoge")
     }
 }

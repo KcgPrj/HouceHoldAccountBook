@@ -1,5 +1,6 @@
 package jp.ac.kcg.config
 
+import jp.ac.kcg.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices
@@ -10,12 +11,15 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.core.Authentication
 import org.springframework.security.oauth2.client.OAuth2ClientContext
 import org.springframework.security.oauth2.client.OAuth2RestTemplate
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client
+import org.springframework.security.oauth2.provider.OAuth2Authentication
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
 import org.springframework.security.web.csrf.CsrfFilter
 import org.springframework.security.web.csrf.CsrfToken
@@ -37,6 +41,8 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
 
     @Autowired
     internal lateinit var oauth2ClientContext: OAuth2ClientContext
+    @Autowired
+    lateinit var userService: UserService
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
@@ -92,9 +98,20 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
     private fun ssoFilter(client: ClientResources, path: String): Filter {
         val filter = OAuth2ClientAuthenticationProcessingFilter(path)
         val template = OAuth2RestTemplate(client.client, oauth2ClientContext)
+        filter.setAuthenticationSuccessHandler(MySavedRequestAwareAuthenticationSuccessHandler(userService))
         filter.setRestTemplate(template)
         filter.setTokenServices(UserInfoTokenServices(client.resource.userInfoUri, client.client.clientId))
         return filter
+    }
+
+    inner class MySavedRequestAwareAuthenticationSuccessHandler(val userService: UserService): SavedRequestAwareAuthenticationSuccessHandler() {
+
+        override fun handle(request: HttpServletRequest?, response: HttpServletResponse?, authentication: Authentication?) {
+            super.handle(request, response, authentication)
+            (authentication as? OAuth2Authentication)?.let {
+                userService.createIfNotExist(it.oAuth2Request.clientId, it.userAuthentication.name)
+            }
+        }
     }
 
 

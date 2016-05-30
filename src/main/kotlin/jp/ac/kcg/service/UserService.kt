@@ -26,6 +26,12 @@ interface  UserService {
     fun createUser(clientId: String, name: String): User
 
     /**
+     * ユーザーが存在しなければ作成する
+     * ユーザーが存在している場合は例外をスローせず何もしません
+     */
+    fun createIfNotExist(clientId: String, name: String)
+
+    /**
      * clientIdとnameに一致するユーザーをDBから取得。存在しなければ新規作成する
      */
     fun findUserOrCreate(clientId: String, name: String): User
@@ -60,6 +66,14 @@ open class UserServiceImpl: UserService {
 
     override fun findUser(clientId: String, name: String): User? {
         return userRepo.findOne(UserPK(clientId, name))
+    }
+
+    @Transactional(readOnly = false)
+    override fun createIfNotExist(clientId: String, name: String) {
+        val pk = UserPK(clientId, name)
+        if(!userRepo.exists(pk)) {
+            userRepo.save(User(pk, name))
+        }
     }
 
     @Transactional(readOnly = false)
