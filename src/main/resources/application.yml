@@ -47,3 +47,13 @@ yahoo:
     scope: "openid"
   resource:
     userInfoUri: "https://userinfo.yahooapis.jp/yconnect/v1/attribute?schema=openid"
+
+google:
+  client:
+    clientId: "759703832833-vn7ji71b41rq1905srf1g8fakcmcubqt.apps.googleusercontent.com"
+    clientSecret: "cHzR2t6GLncWR3D1pXvApzEm"
+    accessTokenUri: "https://accounts.google.com/o/oauth2/token"
+    userAuthorizationUri: "https://accounts.google.com/o/oauth2/auth"
+    scope: "https://www.googleapis.com/auth/plus.me"
+  resource:
+    userInfoUri: "https://www.googleapis.com/plus/v1/people/me"
