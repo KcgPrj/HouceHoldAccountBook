@@ -91,6 +91,7 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
 
         filters.add(ssoFilter(facebook(), "/login/facebook"))
         filters.add(ssoFilter(github(), "/login/github"))
+        filters.add(ssoFilter(yahoo(), "/login/yahoo"))
         filter.setFilters(filters)
         return filter
     }
@@ -123,6 +124,9 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
     @ConfigurationProperties("github")
     open internal fun github() = ClientResources()
 
+    @Bean
+    @ConfigurationProperties("yahoo")
+    open internal fun yahoo() = ClientResources()
 
     @Bean
     open fun oauth2ClientFilterRegistration(filter: OAuth2ClientContextFilter): FilterRegistrationBean {

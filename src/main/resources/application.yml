@@ -36,3 +36,14 @@ github:
     clientAuthenticationScheme: "form"
   resource:
     userInfoUri: "https://api.github.com/user"
+
+yahoo:
+  client:
+    clientId: "dj0zaiZpPVZPRW9FbUlpZktuaiZzPWNvbnN1bWVyc2VjcmV0Jng9ODU-"
+    clientSecret: "025017e7b4c7fcb2303775e8a4c9c08d40068215"
+    accessTokenUri: "https://auth.login.yahoo.co.jp/yconnect/v1/token"
+    userAuthorizationUri: "https://auth.login.yahoo.co.jp/yconnect/v1/authorization"
+    tokenName: "token"
+    scope: "openid"
+  resource:
+    userInfoUri: "https://userinfo.yahooapis.jp/yconnect/v1/attribute?schema=openid"
