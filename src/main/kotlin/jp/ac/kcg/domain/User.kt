@@ -17,7 +17,7 @@ data class UserPK (
          * クライアントで使用されているユーザーのID
          */
         @Column(updatable = false, nullable = false)
-        var name: String = ""
+        var userName: String = ""
 ): Serializable
 
 /**
@@ -29,6 +29,9 @@ data class User(
         @EmbeddedId
         @Column(updatable = false, nullable = false)
         var id: UserPK = UserPK(),
+        /**
+         * ユーザーの表示用の名前
+         */
         @Column(updatable = true, nullable = false)
         var screenName: String = ""
 )
