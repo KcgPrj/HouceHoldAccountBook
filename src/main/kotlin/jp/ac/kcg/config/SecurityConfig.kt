@@ -90,7 +90,6 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
         val filters = ArrayList<Filter>();
 
         filters.add(ssoFilter(facebook(), "/login/facebook"))
-        filters.add(ssoFilter(github(), "/login/github"))
         filters.add(ssoFilter(yahoo(), "/login/yahoo"))
         filters.add(ssoFilter(google(), "/login/google"))
         filter.setFilters(filters)
@@ -120,10 +119,6 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
     @Bean
     @ConfigurationProperties("facebook")
     open internal fun facebook() = ClientResources()
-
-    @Bean
-    @ConfigurationProperties("github")
-    open internal fun github() = ClientResources()
 
     @Bean
     @ConfigurationProperties("yahoo")
