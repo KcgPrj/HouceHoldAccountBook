@@ -37,7 +37,7 @@ import javax.servlet.http.HttpServletResponse
 
 @Configuration
 @EnableOAuth2Client
-open class SecurityConfig: WebSecurityConfigurerAdapter() {
+open class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Autowired
     internal lateinit var oauth2ClientContext: OAuth2ClientContext
@@ -90,7 +90,8 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
         val filters = ArrayList<Filter>();
 
         filters.add(ssoFilter(facebook(), "/login/facebook"))
-        filters.add(ssoFilter(github(), "/login/github"))
+        filters.add(ssoFilter(yahoo(), "/login/yahoo"))
+        filters.add(ssoFilter(google(), "/login/google"))
         filter.setFilters(filters)
         return filter
     }
@@ -104,7 +105,7 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
         return filter
     }
 
-    inner class MySavedRequestAwareAuthenticationSuccessHandler(val userService: UserService): SavedRequestAwareAuthenticationSuccessHandler() {
+    inner class MySavedRequestAwareAuthenticationSuccessHandler(val userService: UserService) : SavedRequestAwareAuthenticationSuccessHandler() {
 
         override fun handle(request: HttpServletRequest?, response: HttpServletResponse?, authentication: Authentication?) {
             super.handle(request, response, authentication)
@@ -120,9 +121,12 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
     open internal fun facebook() = ClientResources()
 
     @Bean
-    @ConfigurationProperties("github")
-    open internal fun github() = ClientResources()
+    @ConfigurationProperties("yahoo")
+    open internal fun yahoo() = ClientResources()
 
+    @Bean
+    @ConfigurationProperties("google")
+    open internal fun google() = ClientResources()
 
     @Bean
     open fun oauth2ClientFilterRegistration(filter: OAuth2ClientContextFilter): FilterRegistrationBean {

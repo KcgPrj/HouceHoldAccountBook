@@ -17,8 +17,8 @@ spring:
 #ソーシャルログイン用の設定
 facebook:
   client:
-    clientId: "233668646673605"
-    clientSecret: "33b17e044ee6a4fa383f46ec6e28ea1d"
+    clientId: "705300639572655"
+    clientSecret: "0678f56411cb35da33253b22ca97fb2f"
     accessTokenUri: "https://graph.facebook.com/oauth/access_token"
     userAuthorizationUri: "https://www.facebook.com/dialog/oauth"
     tokenName: "oauth_token"
@@ -27,12 +27,23 @@ facebook:
   resource:
     userInfoUri: "https://graph.facebook.com/me"
 
-github:
+yahoo:
   client:
-    clientId: "bd1c0a783ccdd1c9b9e4"
-    clientSecret: "1a9030fbca47a5b2c28e92f19050bb77824b5ad1"
-    accessTokenUri: "https://github.com/login/oauth/access_token"
-    userAuthorizationUri: "https://github.com/login/oauth/authorize"
-    clientAuthenticationScheme: "form"
+    clientId: "dj0zaiZpPVZPRW9FbUlpZktuaiZzPWNvbnN1bWVyc2VjcmV0Jng9ODU-"
+    clientSecret: "025017e7b4c7fcb2303775e8a4c9c08d40068215"
+    accessTokenUri: "https://auth.login.yahoo.co.jp/yconnect/v1/token"
+    userAuthorizationUri: "https://auth.login.yahoo.co.jp/yconnect/v1/authorization"
+    tokenName: "token"
+    scope: "openid"
   resource:
-    userInfoUri: "https://api.github.com/user"
+    userInfoUri: "https://userinfo.yahooapis.jp/yconnect/v1/attribute?schema=openid"
+
+google:
+  client:
+    clientId: "759703832833-vn7ji71b41rq1905srf1g8fakcmcubqt.apps.googleusercontent.com"
+    clientSecret: "cHzR2t6GLncWR3D1pXvApzEm"
+    accessTokenUri: "https://accounts.google.com/o/oauth2/token"
+    userAuthorizationUri: "https://accounts.google.com/o/oauth2/auth"
+    scope: "https://www.googleapis.com/auth/plus.me"
+  resource:
+    userInfoUri: "https://www.googleapis.com/plus/v1/people/me"
