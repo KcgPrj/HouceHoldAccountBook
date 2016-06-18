@@ -30,11 +30,11 @@ data class Item(
         /**
          * カテゴリー
          */
-        @ManyToOne
+        @ManyToOne(fetch = javax.persistence.FetchType.EAGER)
         @JoinColumns(
-                JoinColumn(name = "clientId", updatable = false, insertable = false, nullable = false, referencedColumnName = "clientId"),
-                JoinColumn(name = "userName", updatable = false, insertable = false, nullable = false, referencedColumnName = "userName"),
-                JoinColumn(name = "categoryName", updatable = false, insertable = false, nullable = false, referencedColumnName = "categoryName")
+                JoinColumn(name = "clientId", updatable = false, insertable = true, nullable = true, referencedColumnName = "clientId"),
+                JoinColumn(name = "userName", updatable = false, insertable = true, nullable = true, referencedColumnName = "userName"),
+                JoinColumn(name = "categoryName", updatable = false, insertable = true, nullable = true, referencedColumnName = "categoryName")
         )
         var category: ItemCategory = ItemCategory(),
         /**
@@ -42,8 +42,8 @@ data class Item(
          */
         @ManyToOne
         @JoinColumns(
-                JoinColumn(name = "clientId", updatable = false, insertable = false, nullable = false, referencedColumnName = "clientId"),
-                JoinColumn(name = "userName", updatable = false, insertable = false, nullable = false, referencedColumnName = "userName")
+                JoinColumn(name = "clientId", updatable = false, insertable = false, nullable = true, referencedColumnName = "clientId"),
+                JoinColumn(name = "userName", updatable = false, insertable = false, nullable = true, referencedColumnName = "userName")
         )
         var user: User = User()
 )

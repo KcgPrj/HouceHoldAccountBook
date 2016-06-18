@@ -48,7 +48,7 @@ class UserServiceTests {
         assertThat(user).isNotNull()
         assertThat(user.id).isNotNull()
         assertThat(user.id.clientId).isEqualTo("clientId")
-        assertThat(user.id.name).isEqualTo("name")
+        assertThat(user.id.userName).isEqualTo("name")
         assertThat(user.screenName).isEqualTo("name")
 
         val b = userService.findUser("clientId", "name")
