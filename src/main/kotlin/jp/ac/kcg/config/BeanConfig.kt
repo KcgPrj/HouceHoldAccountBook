@@ -1,5 +1,6 @@
 package jp.ac.kcg.config
 
+import jp.ac.kcg.service.ItemServiceImpl
 import jp.ac.kcg.service.UserServiceImpl
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer
 import org.springframework.boot.web.servlet.ErrorPage
@@ -21,4 +22,7 @@ open class BeanConfig {
 
     @Bean
     open fun userService() = UserServiceImpl()
+
+    @Bean
+    open fun itemService() = ItemServiceImpl()
 }
