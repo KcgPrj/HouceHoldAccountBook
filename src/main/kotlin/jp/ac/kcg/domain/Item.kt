@@ -13,6 +13,11 @@ data class Item(
         @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
         var id: Long = 0,
         /**
+         * アイテムの名前
+         */
+        @Column(updatable = true, nullable = false)
+        var itemName: String = "",
+        /**
          * 支払いが発生した日付
          */
         @Column(updatable = true, nullable = false)
