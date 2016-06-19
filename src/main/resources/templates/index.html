@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8"/>
     <title>ログイン</title>
+    <link rel="stylesheet" href="../static/css/base.css" th:href="@{'/css/base.css'}">
+    <link rel="stylesheet" href="../static/css/login_main.css" th:href="@{'/css/login_base.css'}">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"
             th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script>
@@ -42,20 +44,35 @@
     </script>
 </head>
 <body>
-<table th:if="${principal == null}">
-    <tr>
-        <td>Login with:</td>
-        <td><a href="/login/facebook">facebook</a></td>
-    </tr>
-    <tr>
-        <td>Login with:</td>
-        <td><a href="/login/yahoo">yahoo</a></td>
-    </tr>
-    <tr>
-        <td>Login with:</td>
-        <td><a href="/login/google">google</a></td>
-    </tr>
-</table>
+    <div id="bg-image" class="pst-r m0 p0"></div>
+    <article id="login_form" class="pst-a p15">
+        <div class="login_inner">
+            <!--サイトロゴ-->
+            <div class="sitelogo pst-a"></div>
+            <!--ココまで-->
+            <table id="form_table" class="mt180 tac" th:if="${principal == null}">
+                <tbody>
+                    <tr>
+                        <td><a href="/login/yahoo"><img src="../static/img/SocialBtn_Yahoo.png"
+                                                        th:src="@{'img/SocialBtn_Yahoo.png'}" 
+                                                        alt="Yahoo!アカウントでログイン"></a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/login/google"><img src="../static/img/SocialBtn_google.png"
+                                                         th:src="@{'img/SocialBtn_google.png'}" 
+                                                         alt="Googleアカウントでログイン"></a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/login/facebook"><img src="../static/img/SocialBtn_fb.png"
+                                                           th:src="img/SocialBtn_fb.png" 
+                                                           alt="Facebookアカウントでログイン"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+    
+    
 <div th:if="${principal != null}">
     <p th:text="|${principal.name}でログイン済み|">xxxでログイン済み</p>
     <button id="logout">ログアウト</button>
