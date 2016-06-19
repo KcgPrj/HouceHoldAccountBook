@@ -17,12 +17,8 @@ body, html {
 
 /* line 36, login_main.scss */
 div#bg-image {
-  background-image: url(../img/haikei.jpg);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-color: #464646;
+  width: 100%;
+  height: 100%;
   /*背景ぼかし*/
   filter: blur(120px);
   -moz-filter: blur(120px);
@@ -31,7 +27,7 @@ div#bg-image {
   width: 100%; }
 
 /*フォーム本体*/
-/* line 51, login_main.scss */
+/* line 45, login_main.scss */
 #login_form {
   margin: -300px 0 0 -200px;
   background-color: rgba(255, 255, 255, 0.6);
@@ -46,7 +42,7 @@ div#bg-image {
   -webkit-border-radius: 5px;
   /*サイトロゴ*/
   /*フォーム内テーブル*/ }
-  /* line 59, login_main.scss */
+  /* line 53, login_main.scss */
   #login_form .sitelogo {
     height: 200px;
     width: 200px;
@@ -56,11 +52,10 @@ div#bg-image {
     top: 0px;
     left: 100px;
     bottom: 0;
-    right: 0;
-    background-image: url("../img/site_logo.png"); }
-  /* line 67, login_main.scss */
+    right: 0; }
+  /* line 60, login_main.scss */
   #login_form #form_table {
     width: 370px; }
-    /* line 70, login_main.scss */
+    /* line 63, login_main.scss */
     #login_form #form_table tr {
       height: 85px; }

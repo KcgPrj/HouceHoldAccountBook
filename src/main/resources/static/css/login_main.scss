@@ -34,14 +34,8 @@ body,html{
 }
 
 div#bg-image{
-    background:{
-        image: url(../img/haikei.jpg);
-        position: center center;
-        repeat: no-repeat;
-        attachment: fixed;
-        size: cover;
-        color: #464646;
-    }
+    width: 100%;
+    height: 100%;
     /*背景ぼかし*/
     @include setPrefix(filter, blur(120px));
     @include size(100%,100%);
@@ -60,7 +54,6 @@ div#bg-image{
         @include size(200px,200px);
         @include setPrefix(border-radius, 100px);
         @include position(0px, 0,0, 100px);
-        background-image: url("../img/site_logo.png");
     }
     
     /*フォーム内テーブル*/
