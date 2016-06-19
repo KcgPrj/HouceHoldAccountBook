@@ -1,0 +1,47 @@
+/*汎用CSS (必要に応じて随時追加)*/
+
+/*position*/
+.pst-r{position: relative}
+.pst-a{position: absolute;}
+.pst-f{position: fixed;}
+
+/*margin*/
+.m0{margin: 0;}
+.m0a{margin: 0 auto;;}
+.mt10{margin-top: 10px;}
+.mt30{margin-top: 30px;}
+.mt50{margin-top: 50px;}
+.mt100{margin-top: 100px;}
+.mt150{margin-top: 150px;}
+.mt180{margin-top: 180px;}
+.mt200{margin-top: 200px;}
+.ml30{margin-left: 30px;}
+.ml3p{margin-left: 3%;}
+.ml20p{margin-left: 20%;}
+.ml40p{margin-left: 40%;}
+
+/*padding*/
+.p0{padding:0;}
+.p15{padding: 15px;}
+.pt15{padding: 15px;}
+.pr20{padding-right: 20px;}
+.pl20{padding-left: 20px;}
+.pb10{padding-bottom: 10px;}
+
+/*float*/
+.fn{float: none;}
+.fi{float:inherit;}
+.fl{float: left;}
+.fr{float: right;}
+
+/*text-align*/
+.tac{text-align: center;}
+.tal{text-align: left;}
+.tar{text-align: right;}
+
+/*display*/
+.db{display: block;}
+
+/*font-size*/
+.fs30{font-size:30px;}
+.fs50{font-size: 50px;}

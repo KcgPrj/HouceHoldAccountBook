@@ -1,0 +1,67 @@
+@charset "utf-8" ;
+
+/*@Mixin*/
+$set-prefix: '' , -moz- , -webkit-;
+@mixin setPrefix($name, $value) {
+    @each $prefix in $set-prefix {
+        #{$prefix}#{$name}: $value;
+    }
+}
+@mixin size($h,$w){
+    height: $h;
+    width: $w;
+}
+@mixin position($top,$right,$bottom,$left){
+    top: $top;
+    left: $left;
+    bottom: $bottom;
+    right: $right;
+}
+
+
+/*All content*/
+*::before,
+*{
+    @include setPrefix(box-sizing, border-box);
+}
+
+/*縦幅100%*/
+
+body,html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+div#bg-image{
+    width: 100%;
+    height: 100%;
+    /*背景ぼかし*/
+    @include setPrefix(filter, blur(120px));
+    @include size(100%,100%);
+}
+
+/*フォーム本体*/
+#login_form{
+    margin: -300px 0 0 -200px;
+    background-color: rgba(255,255,255,0.60);
+    @include position(50%,0,0,50%);
+    @include size(500px,400px);
+    @include setPrefix(border-radius, 5px);
+    
+    /*サイトロゴ*/
+    .sitelogo{
+        @include size(200px,200px);
+        @include setPrefix(border-radius, 100px);
+        @include position(0px, 0,0, 100px);
+    }
+    
+    /*フォーム内テーブル*/
+    #form_table{
+        width: 370px;
+        
+        tr{
+            height: 85px; 
+        }
+    }
+}
